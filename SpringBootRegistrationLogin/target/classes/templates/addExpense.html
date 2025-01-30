@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            width: 100%; /* Changed from 150% to 100% to avoid overflow */
+        }
+
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            width: 400px; /* Increased from 300px to 400px */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, button {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2, a {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+    <title>Add Expense</title>
+</head>
+<body>
+    <h2>Add Expense</h2>
+    <p>Login user <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+    <div class="form-container">
+        <form th:action="@{/add-expense}" th:object="${expense}" method="post">
+            <label for="category">Category:</label>
+            <input type="text" th:field="*{category}" placeholder="Category" required><br>
+
+            <label for="description">Description:</label>
+            <input type="text" th:field="*{description}" placeholder="Description" required><br>
+
+            <label for="amount">Amount:</label>
+            <input type="number" th:field="*{amount}" placeholder="Amount" step="0.01" required><br>
+
+            <label for="date">Date:</label>
+            <input type="date" th:field="*{date}" required><br>
+
+            <label for="member">Member:</label>
+            <input type="text" th:field="*{member}" placeholder="Member" required><br>
+
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+    <a href="/view-expenses">View All Expenses</a>
+</body>
+</html>
